@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Add New User</h1>
-<form th:action="@{/users}" method="post">
+<form th:action="@{/users/create}" method="post">
     <label>Name: <input type="text" name="name" required></label><br>
     <label>Email: <input type="email" name="email" required></label><br>
     <label>Age: <input type="number" name="age" required></label><br>

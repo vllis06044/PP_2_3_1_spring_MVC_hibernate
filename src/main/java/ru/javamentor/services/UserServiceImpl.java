@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javamentor.dao.UserDao;
 import ru.javamentor.entities.User;
-import java.util.List;
 
 @Service
 @Transactional
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
+    public java.util.List<User> getAll() {
         return userDao.findAll();
     }
 }

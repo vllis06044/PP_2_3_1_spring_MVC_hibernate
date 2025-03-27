@@ -1,6 +1,5 @@
-package ru.javamentor.controller;
+package ru.javamentor.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -27,29 +25,29 @@ public class UserController {
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("user", new User());
-        return "users/create";
+        return "add-user";
     }
 
     @PostMapping("/create")
     public String createUser(@ModelAttribute User user) {
-        userService.create(user); // Используем правильное имя метода
+        userService.create(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
+    @GetMapping("/edit")
+    public String showEditForm(@RequestParam Long id, Model model) {
         model.addAttribute("user", userService.getById(id));
-        return "users/edit";
+        return "edit-user";
     }
 
-    @PostMapping("/{id}")
-    public String updateUser(@PathVariable Long id, @ModelAttribute User user) {
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute User user) {
         userService.update(user);
         return "redirect:/users";
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteUser(@PathVariable Long id) {
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam Long id) {
         userService.delete(id);
         return "redirect:/users";
     }
